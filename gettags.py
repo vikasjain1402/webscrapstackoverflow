@@ -26,7 +26,7 @@ t1=time.perf_counter()
 
 returnvalue=[]
 with concurrent.futures.ThreadPoolExecutor() as executor:
-    for i in range(1,21):
+    for i in range(21,22):
         future=executor.submit(getdata,i)
         returnvalue.append(future.result())
 
