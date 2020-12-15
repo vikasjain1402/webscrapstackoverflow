@@ -16,6 +16,9 @@ def getdata(pageno)    :
      
         finaldata[str(data2[0].text)]={"count":int(data4[0].text.split(" ")[0]),"discription":str(data5[0].text)}
     return finaldata
+
+
+
 t1=time.perf_counter()
 
 
