@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 from  json import loads,dumps
 import os,time,datetime,concurrent.futures,requests
-#from  threading import Thread
 
 f=dict()
 def getdata(pageno)    :
@@ -19,25 +18,8 @@ def getdata(pageno)    :
      
         finaldata[str(data2[0].text)]={"count":int(data4[0].text.split(" ")[0]),"discription":str(data5[0].text)}
     f.update(finaldata)    
-    #return finaldata
 t1=time.perf_counter()
 
-'''
-returnvalue=[]
-with concurrent.futures.ThreadPoolExecutor() as executor:
-    for i in range(1,2):
-        future=executor.submit(getdata,i)
-        returnvalue.append(future.result())
-'''
-'''        
-thread =[]      
-for pageno in range(1,21):
-    x=Thread(target=getdata,args=(pageno,))
-    thread.append(x)
-    x.start()
-for pageno in thread:
-    pageno.join()  
-'''
 
 for pageno in range(1,21):
     getdata(pageno)
@@ -46,7 +28,6 @@ for pageno in range(1,21):
 t2=time.perf_counter()
 
 print("time taken: ",t2-t1)    
-#json_object=dumps(returnvalue,indent=4)
 
 json_object=dumps(f,indent=4)
 filename=os.path.join(os.path.dirname(__file__),"tags1.json")
