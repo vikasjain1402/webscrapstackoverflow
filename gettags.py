@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from  json import loads,dumps
-import os,time,datetime,concurrent.futures,requests
-#from  threading import Thread
+import os,time,datetime,requests
+
 
 f=dict()
 def getdata(pageno)    :
@@ -18,42 +18,25 @@ def getdata(pageno)    :
         data5=i.find_all('div',class_="grid--cell fc-medium mb12 v-truncate4")
      
         finaldata[str(data2[0].text)]={"count":int(data4[0].text.split(" ")[0]),"discription":str(data5[0].text)}
-    f.update(finaldata)    
-    #return finaldata
+    f.update(finaldata)
 t1=time.perf_counter()
 
-'''
-returnvalue=[]
-with concurrent.futures.ThreadPoolExecutor() as executor:
-    for i in range(1,2):
-        future=executor.submit(getdata,i)
-        returnvalue.append(future.result())
-'''
-'''        
-thread =[]      
-for pageno in range(1,21):
-    x=Thread(target=getdata,args=(pageno,))
-    thread.append(x)
-    x.start()
-for pageno in thread:
-    pageno.join()  
-'''
+
+
 
 for pageno in range(1,21):
     getdata(pageno)
 
-           
+
 t2=time.perf_counter()
 
-print("time taken: ",t2-t1)    
-#json_object=dumps(returnvalue,indent=4)
+print("time taken: ",t2-t1)
 
 json_object=dumps(f,indent=4)
 filename=os.path.join(os.path.dirname(__file__),"tags1.json")
 with open (filename,"w") as fp:
-    fp.write(json_object)       
+    fp.write(json_object)
 
-    
 
 '''
 filename=os.path.join(os.path.dirname(__file__),"tags1.json") 
