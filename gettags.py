@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from  json import loads,dumps
-import os,time,datetime,concurrent.futures,requests
+import os,time,datetime,requests
 
 f=dict()
 def getdata(pageno)    :
